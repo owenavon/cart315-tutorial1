@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rotator : MonoBehaviour {
-
+public class Rotator : MonoBehaviour 
+{
     public float rotationSpeed = 0.3f;
+    public PickerUpper player;
+
     private bool rotate;
 
     // Start is called before the first frame update
@@ -25,8 +27,16 @@ public class Rotator : MonoBehaviour {
 
     // If you need to make changes in regular intervals
     void FixedUpdate() {
-        if (rotate) {
-            this.GetComponent<Transform>().Rotate(0, rotationSpeed, 0);
+        if (player != null)
+        {
+            if (rotate && player.count >= 2)
+            {
+                this.GetComponent<Transform>().Rotate(0, rotationSpeed, 0);
+            }
         }
+        else 
+        { 
+            this.GetComponent<Transform>().Rotate(0, rotationSpeed, 0);
+        }  
     }
 }
