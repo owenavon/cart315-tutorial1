@@ -22,7 +22,10 @@ public class CollisionResponse : MonoBehaviour
     {
         if (collision.collider.gameObject == player)
         {
-            this.GetComponent<Rigidbody>().AddForce(new Vector3(0, 200.0f, 0)); // Force changes the accleration
+            Vector3 force = this.transform.position - collision.collider.gameObject.transform.position; // One posistion - other posistion to make ball move forward
+            force.Normalize(); // Always have a force of exactly 200
+            force = force * 200f; // Scales vector, and reduces magnitude
+            this.GetComponent<Rigidbody>().AddForce(force); // Force changes the accleration
         }
     }
 }

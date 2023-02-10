@@ -5,6 +5,7 @@ using UnityEngine;
 public class PickerUpper : MonoBehaviour
 {
     public int count = 0;
+    public GameObject particlePrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +23,9 @@ public class PickerUpper : MonoBehaviour
     {
         if (collision.collider.gameObject.CompareTag("Pickup"))
         {
-            GameObject.Destroy(collision.collider.gameObject);
+            GameObject.Instantiate(particlePrefab, collision.collider.gameObject.transform.position, Quaternion.identity); // Makes a copy of the gmaeObject. Quaeternion.identiy means rotation that does not do anything.
+
+            GameObject.Destroy(collision.collider.gameObject); // Destroy cube
 
             count = count + 1;
 
